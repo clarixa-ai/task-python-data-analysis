@@ -1,14 +1,19 @@
 {
-  "name": "Clarixa Python Task",
+  "name": "Clarixa – Python Task",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "hostRequirements": {
     "cpus": 2
   },
   "customizations": {
     "vscode": {
-      "extensions": []
+      "extensions": [
+        "ms-python.python",
+        "clarixa-ai.clarixa"
+      ],
+      "settings": {
+        "python.analysis.typeCheckingMode": "basic"
+      }
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt || true",
-  "postAttachCommand": "code CLARIXA_TASK.md"
+  "postCreateCommand": "pip install -r requirements.txt 2>/dev/null || true; curl -sf \"https://api.clarixa.org/api/extension/claim-launch?githubUser=${GITHUB_USER}\" -o CLARIXA_TASK.json 2>/dev/null && echo 'Clarixa task loaded.' || echo 'No pending Clarixa task — use Setup Task command in VS Code.'"
 }
