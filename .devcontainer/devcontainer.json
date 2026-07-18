@@ -7,13 +7,12 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python",
-        "./clarixa-0.1.0.vsix"
+        "ms-python.python"
       ],
       "settings": {
         "python.analysis.typeCheckingMode": "basic"
       }
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt 2>/dev/null || true; curl -sf \"https://api.clarixa.org/api/extension/claim-launch?githubUser=${GITHUB_USER}\" -o CLARIXA_TASK.json 2>/dev/null && echo 'Clarixa task loaded.' || echo 'No pending Clarixa task — use Setup Task command in VS Code.'"
+  "postCreateCommand": "code --install-extension ./clarixa-0.1.0.vsix --force 2>/dev/null || true; pip install -r requirements.txt 2>/dev/null || true; curl -sf \"https://api.clarixa.org/api/extension/claim-launch?githubUser=${GITHUB_USER}\" -o CLARIXA_TASK.json 2>/dev/null && echo 'Clarixa task loaded.' || echo 'No pending Clarixa task — use Setup Task command in VS Code.'"
 }
